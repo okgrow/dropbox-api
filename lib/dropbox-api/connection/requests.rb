@@ -32,7 +32,7 @@ module Dropbox
         def get_raw(endpoint, path, data = {}, headers = {})
           query = Dropbox::API::Util.query(data)
           request(:raw => true) do
-            token(endpoint).get "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9\.\-]", true))}?#{URI.parse(URI.encode(query))}", headers
+            token(endpoint).get "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9_\.\-]", true))}?#{URI.parse(URI.encode(query))}", headers
           end
         end
 
@@ -40,19 +40,19 @@ module Dropbox
           query = Dropbox::API::Util.query(data)
           request do
             # TODO: Tested with only: !@#$%^&.-
-            token(endpoint).get "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9\.\-]", true))}?#{URI.parse(URI.encode(query))}", headers
+            token(endpoint).get "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9_\.\-]", true))}?#{URI.parse(URI.encode(query))}", headers
           end
         end
 
         def post(endpoint, path, data = {}, headers = {})
           request do
-            token(endpoint).post "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9\.\-]", true))}", data, headers
+            token(endpoint).post "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9_\.\-]", true))}", data, headers
           end
         end
 
         def put(endpoint, path, data = {}, headers = {})
           request do
-            token(endpoint).put "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9\.\-]", true))}", data, headers
+            token(endpoint).put "#{Dropbox::API::Config.prefix}#{URI.escape(path, Regexp.new("[^\/a-z0-9_\.\-]", true))}", data, headers
           end
         end
 
